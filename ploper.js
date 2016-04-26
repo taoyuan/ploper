@@ -1,5 +1,6 @@
 "use strict";
 
+var _ = require('lodash');
 var path = require('path');
 var fs = require('fs-extra');
 var colors = require('colors');
@@ -71,10 +72,21 @@ exports.plop = function (plopfile, output, options) {
   /**
    *
    * @param {String} generator The generator name selected
+   * @param {Object} [data] The data
    * @returns {Promise}
    */
-  plop.run = function (generator) {
-    return logic.getPlopData(generator).then(logic.executePlop);
+  plop.run = function (generator, data) {
+    if (typeof generator !== 'string') {
+      data = generator;
+      generator = null;
+    }
+
+    generator = generator || (plop.generators && plop.generators.length && plop.generators[0].name);
+    data = data || {};
+
+    return logic.getPlopData(generator).then(function (result) {
+      return logic.executePlop(_.assign(result, data));
+    });
   };
 
   /**

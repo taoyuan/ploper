@@ -1,5 +1,7 @@
 # Ploper
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/taoyuan/ploper.svg)](https://greenkeeper.io/)
+
 > Perform [plop](https://github.com/amwmedia/plop) more freely
 
 ## Installation
